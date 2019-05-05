@@ -13,7 +13,7 @@ fi
 TMPDIR=/dev /sbin/start-stop-daemon --start --chuid `whoami` --chdir $PWD --background --make-pidfile --pidfile /tmp/kernel.pid --exec /linux/linux -- \
  rootfstype=hostfs rw quiet eth0=slirp,,/usr/bin/slirp-fullbolt mem=$MEM init=/init.sh
 
-/usr/local/bin/gotty --port $PORT --permit-write --reconnect /bin/sh &
+/usr/local/bin/gotty --port $PORT -c user:pass --permit-write --reconnect /bin/sh &
 echo -n "waiting for dockerd "
 while true; do
 	if docker info 2>/dev/null >/dev/null; then
