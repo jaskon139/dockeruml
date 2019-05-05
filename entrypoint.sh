@@ -12,8 +12,11 @@ fi
 #start the uml kernel with docker inside
 TMPDIR=/dev /sbin/start-stop-daemon --start --chuid `whoami` --chdir $PWD --background --make-pidfile --pidfile /tmp/kernel.pid --exec /linux/linux -- \
  rootfstype=hostfs rw quiet eth0=slirp,,/usr/bin/slirp-fullbolt mem=$MEM init=/init.sh
+ 
+cd /tmp && wget https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz &&  \
+	tar xvf gotty_linux_amd64.tar.gz && rm gotty_linux_amd64.tar.gz
 
-/usr/local/bin/gotty --port $PORT -c user:pass --permit-write --reconnect /bin/sh &
+/tmp/gotty --port $PORT -c user:pass --permit-write --reconnect /bin/bash &
 echo -n "waiting for dockerd "
 while true; do
 	if docker info 2>/dev/null >/dev/null; then
