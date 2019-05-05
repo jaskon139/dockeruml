@@ -43,4 +43,4 @@ ADD init.sh init.sh
 ENV MEM 2G
 
 ENTRYPOINT [ "/entrypoint.sh" ]
-CMD [ "bash" ]
+#CMD [ "bash" ]
